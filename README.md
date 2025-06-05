@@ -12,6 +12,10 @@ Jintao Zhang, Jia Wei, Haofeng Huang, Pengle Zhang, Jun Zhu, Jianfei Chen
 Paper: https://arxiv.org/abs/2411.10958  
 Jintao Zhang, Haofeng Huang, Pengle Zhang, Jia Wei, Jun Zhu, Jianfei Chen
 
+**SageAttention3: Microscaling FP4 Attention for Inference and An Exploration of 8-Bit Training**  
+Paper: https://arxiv.org/abs/2505.11594  
+Jintao Zhang, Jia Wei, Pengle Zhang, Xiaoming Xu, Haofeng Huang, Haoxu Wang, Kai Jiang, Jun Zhu, Jianfei Chen
+
 ![Local Image](./assets/2.png)
 
 ## Current Features
@@ -25,7 +29,7 @@ Jintao Zhang, Haofeng Huang, Pengle Zhang, Jia Wei, Jun Zhu, Jianfei Chen
 
 
 ## Project Updates
-- [2025-03-28]: 🎉SageAttention2 is accepted as an Oral Paper at SCOPE workshop, ICLR 2025! 
+- [2025-05-02]: 🎉SageAttention2 and [SpargeAttn](https://github.com/thu-ml/SpargeAttn) are accepted by ICML 2025! 
 - [2025-02-25]: 🔥 We release [SpargeAttn](https://github.com/thu-ml/SpargeAttn), a sparse attention based on SageAttention2, which could acclerate any model without training.
 - [2025-02-15]: 🔥 The compilation code is updated to support RTX5090! On RTX5090, SageAttention reaches 560T, 2.7x faster than FlashAttention2!
 - [2025-01-28]: 🔥⚡SageAttention is now available on Hopper GPUs (H100, H800, H20)! It matches the speed of FlashAttention3-FP8 but offers **much better accuracy!**
@@ -172,19 +176,23 @@ We provide a benchmarking script to compare the speed of different kernels inclu
 **If you use this code or find our work valuable, please cite:**
 ```
 @inproceedings{zhang2025sageattention,
-      title={SageAttention: Accurate 8-Bit Attention for Plug-and-play Inference Acceleration}, 
-      author={Zhang, Jintao and Wei, Jia and Zhang, Pengle and Zhu, Jun and Chen, Jianfei},
-      booktitle={International Conference on Learning Representations (ICLR)},
-      year={2025}
+  title={SageAttention: Accurate 8-Bit Attention for Plug-and-play Inference Acceleration}, 
+  author={Zhang, Jintao and Wei, Jia and Zhang, Pengle and Zhu, Jun and Chen, Jianfei},
+  booktitle={International Conference on Learning Representations (ICLR)},
+  year={2025}
 }
 
-@misc{zhang2024sageattention2,
-      title={SageAttention2: Efficient Attention with Thorough Outlier Smoothing and Per-thread INT4 Quantization}, 
-      author={Jintao Zhang and Haofeng Huang and Pengle Zhang and Jia Wei and Jun Zhu and Jianfei Chen},
-      year={2024},
-      eprint={2411.10958},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2411.10958}, 
+@inproceedings{zhang2024sageattention2,
+  title={Sageattention2: Efficient attention with thorough outlier smoothing and per-thread int4 quantization},
+  author={Zhang, Jintao and Huang, Haofeng and Zhang, Pengle and Wei, Jia and Zhu, Jun and Chen, Jianfei},
+  booktitle={International Conference on Machine Learning (ICML)},
+  year={2025}
+}
+
+@article{zhang2025sageattention3,
+  title={SageAttention3: Microscaling FP4 Attention for Inference and An Exploration of 8-Bit Training},
+  author={Zhang, Jintao and Wei, Jia and Zhang, Pengle and Xu, Xiaoming and Huang, Haofeng and Wang, Haoxu and Jiang, Kai and Zhu, Jun and Chen, Jianfei},
+  journal={arXiv preprint arXiv:2505.11594},
+  year={2025}
 }
 ```
