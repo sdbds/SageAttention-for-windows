@@ -30,6 +30,7 @@ Jintao Zhang, Jia Wei, Pengle Zhang, Xiaoming Xu, Haofeng Huang, Haoxu Wang, Kai
 
 
 ## Project Updates
+- [2025-07-21]: The early access to SageAttention3 code is available at [HuggingFace](https://huggingface.co/jt-zhang/SageAttention3), where you'll need to fill out a form in detail and await approval.
 - [2025-07-01]: The code of [SageAttention2++](https://arxiv.org/pdf/2505.21136) is released in this repository. We would still greatly appreciate it if you could take a moment to fill out the Form in [Huggingface](https://huggingface.co/jt-zhang/SageAttention2_plus). Thank you very much!
 
 ![Local Image](./assets/5090_sageattn2++.png)
@@ -79,7 +80,8 @@ For SageAttention V1 in Triton (slower than SageAttention V2/V2++/V3), refer to 
 To use SageAttention 2.2.0 (containing SageAttention2++), please **compile from source**:
 ```
 git clone https://github.com/thu-ml/SageAttention.git
-cd sageattention 
+cd SageAttention 
+export EXT_PARALLEL=4 NVCC_APPEND_FLAGS="--threads 8" MAX_JOBS=32 # parallel compiling (Optional)
 python setup.py install  # or pip install -e .
 ```
 
