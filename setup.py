@@ -17,6 +17,7 @@ limitations under the License.
 import os
 import subprocess
 import threading
+import platform
 from packaging.version import parse, Version
 import warnings
 
@@ -45,6 +46,22 @@ NVCC_FLAGS = [
     "-Xptxas=-v",
     "-diag-suppress=174", # suppress the specific warning
 ]
+
+# Windows-specific fixes for MSVC compiler
+if platform.system() == "Windows":
+    CXX_FLAGS += [
+        "/bigobj",           # Handle large object files
+        "/permissive-",      # Disable non-conforming code
+        "/DNOMINMAX",        # Prevent min/max macro conflicts
+        "/D_USE_MATH_DEFINES", # Define math constants
+    ]
+    # Add MSVC-specific NVCC flags
+    NVCC_FLAGS += [
+        "-Xcompiler=/bigobj",
+        "-Xcompiler=/permissive-",
+        "-DNOMINMAX",
+        "-D_USE_MATH_DEFINES",
+    ]
 
 ABI = 1 if torch._C._GLIBCXX_USE_CXX11_ABI else 0
 CXX_FLAGS += [f"-D_GLIBCXX_USE_CXX11_ABI={ABI}"]
