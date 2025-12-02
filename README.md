@@ -1,4 +1,5 @@
-官方的仓库（https://github.com/sdbds/SageAttention-for-windows）没有适配秋叶整合包V2的SageAttention2.2预编译版本。为了玩Z-image我只能自己编译一个。
+官方的仓库：https://github.com/sdbds/SageAttention-for-windows
+因为官方仓库没有适配秋叶整合包V2的SageAttention2.2预编译版本。为了玩Z-image我只能自己编译一个。
 效果还是很给力的，FP8模型+FP16的seedvr2出4K图在我的4080S+32GRAM下甚至可以控制在50S左右（非首次出图时、每次启动的第一张图会比较慢）。
 中间踩了很多坑，什么依赖库缺失、叶整合包自带cu129装最新的13.0版本cuda Toolkit就会编译报错、Microsoft Visual C++缺失、Triton最新版3.5不匹配torch2.8必须降级3.4否则SageAttention会报错（Error running sage attention: Triton only support CUDA 10.0 or higher, but got CUDA version: 12.8, using pytorch attention instead.）
 好不容易编译出来了，独乐乐不如众乐乐，也让我踩的坑更有价值。
