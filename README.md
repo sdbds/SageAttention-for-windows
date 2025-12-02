@@ -67,7 +67,9 @@ python -m pip list | findstr SageAttention
 
 1.安装过程中出现明显 ERROR / Failed to build，请把全部日志复制下来丢给AI（国产的qwen3-max推荐），让AI判断缺了什么依赖并给出安装命令。
 
-2.编译好的 .whl 通常不再需要本地 CUDA Toolkit 以及 Visual Studio.如果出现报错。请到https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html查询你显卡驱动对应的CUDA Toolkit的版本。（显卡驱动版本可在NVDIA控制面板查看）然后到https://developer.nvidia.com/cuda-toolkit-archive下载对应版本。
+2.编译好的 .whl 通常不再需要本地 CUDA Toolkit 以及 Visual Studio.
+如果出现报错。请到 https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html  查询你显卡驱动对应的CUDA Toolkit的版本。（显卡驱动版本可在NVDIA控制面板查看）
+然后到 https://developer.nvidia.com/cuda-toolkit-archive   下载对应版本。
 
 特别提醒：秋叶整合包的cu129最高只能安装到CUDA Toolkit 12.9 Update 1！安装最新版本会报错！如需安装Visual Studio，需要勾选“Windows 10 SDK” 或者 “Windows 11 SDK”（通常在“使用 C++ 的桌面开发”那一栏的右侧详细列表里）。
 
