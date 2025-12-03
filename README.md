@@ -59,7 +59,7 @@ python -m pip uninstall triton triton-windows
 
 4.验证安装
 
-python -m pip list | findstr SageAttention
+python -m pip list | findstr sageattention
 
 正常情况下，第一次跑图比较慢，等系统编译 好CUDA 核就能正常加速了。
 
