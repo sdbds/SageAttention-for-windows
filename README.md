@@ -1,3 +1,80 @@
+官方的仓库：https://github.com/sdbds/SageAttention-for-windows
+
+因为官方仓库没有适配秋叶整合包V2的SageAttention2.2预编译版本。为了玩Z-image我只能自己编译一个。
+
+效果还是很给力的，FP8模型+FP16的seedvr2出4K图在我的4080S+32GRAM下甚至可以控制在50S左右（非首次出图时、每次启动的第一张图会比较慢）。
+
+中间踩了很多坑，什么依赖库缺失、叶整合包自带cu129装最新的13.0版本cuda Toolkit就会编译报错、Microsoft Visual C++缺失、Triton最新版3.5不匹配torch2.8必须降级3.4否则SageAttention会报错（Error running sage attention: Triton only support CUDA 10.0 or higher, but got CUDA version: 12.8, using pytorch attention instead.）
+
+好不容易编译出来了，独乐乐不如众乐乐，也让我踩的坑更有价值。
+
+参考安装教程：
+如何在最新秋叶整合包(ComfyUI-aki-v2)中安装SageAttention最新版（2.2.0）
+
+注意：以下操作全部在秋叶整合包自带的CMD窗口中运行！可以免去配置环境变量和被系统自带的python干扰的风险！
+
+秋叶整合包下载地址：https://t.bilibili.com/1099726378314498050
+
+Z-image模型和推荐工作流下载：https://www.bilibili.com/video/BV1pRSMBHERD
+
+comfyui基础教程参考：https://www.bilibili.com/video/BV11pHtzoEsf/
+
+（最好按照工作流作者的整合包里安装的插件列表，在秋叶V2里再安装一遍，工作流就不会报错了）（为什么不用工作流作者自己的整合包呢？emmm其实也是可以的 ，但是那个秋叶整合包版本比较旧是V1的）（安装完记得更新comfyui到最新开发版才能跑）
+
+1.确认python版本和Torch版本
+
+在CMD中输入：“python -m pip list | findstr torch”。如果你的秋叶整合包版本正确，应该可以看到：
+
+open_clip_torch ：3.2.0
+
+torch ：2.8.0+cu129
+
+torchaudio ：2.8.0+cu129
+
+torchsde： 0.2.6
+
+torchvision ：0.23.0+cu129
+
+输入：python --version，秋叶整合包自带的python版本应该是cpython-312
+
+升级强迫症可选：python -m pip install --upgrade pip
+
+2.安装依赖Triton 3.4
+
+（Triton的最新版已经更新到3.5，但是官方文档显示torch 2.8.0只能匹配3.5之前的版本，所以不要试图安装最新版，否则会报错Error running sage attention: Triton only support CUDA 10.0 or higher, but got CUDA version: 12.8, using pytorch attention instead.）
+
+命令：python -m pip install -U "triton-windows<3.5"
+
+如果你之前安装了其他版本的triton或者triton-windows需要全部卸载（通过python -m pip list | findstr triton可以判断是否已经安装，默认情况下是空输出）
+
+python -m pip uninstall triton triton-windows
+
+3.下载我编译好的SageAttention。（在本仓库的releases中）
+
+注意，我编译的这个版本，仅适配torch 2.8.0+cu129、python3.12的环境！！！（也就是不适配V1版本的整合包）
+
+安装方法：把下载下来的这个 .whl 文件，放到 C:\AI\ComfyUI-aki-v2\ComfyUI 这个文件夹里。（注意：C:\AI\ComfyUI-aki-v2\ 要替换为你秋叶整合包的安装位置！）
+
+在CMD中输入：python -m pip install sageattention-2.2.0-cp312-cp312-win_amd64.whl
+
+4.验证安装
+
+python -m pip list | findstr sageattention
+
+正常情况下，第一次跑图比较慢，等系统编译 好CUDA 核就能正常加速了。
+
+疑难杂症排解：
+
+1.安装过程中出现明显 ERROR / Failed to build，请把全部日志复制下来丢给AI（国产的qwen3-max推荐），让AI判断缺了什么依赖并给出安装命令。
+
+2.编译好的 .whl 通常不再需要本地 CUDA Toolkit 以及 Visual Studio.
+如果出现报错。请到 https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html  查询你显卡驱动对应的CUDA Toolkit的版本。（显卡驱动版本可在NVDIA控制面板查看）
+然后到 https://developer.nvidia.com/cuda-toolkit-archive   下载对应版本。
+
+特别提醒：秋叶整合包的cu129最高只能安装到CUDA Toolkit 12.9 Update 1！安装最新版本会报错！如需安装Visual Studio，需要勾选“Windows 10 SDK” 或者 “Windows 11 SDK”（通常在“使用 C++ 的桌面开发”那一栏的右侧详细列表里）。
+
+--- -->
+
 # SageAttention
 <!-- We are continuously updating more features. You could **Star** and **Watch** our repository to stay updated.
 
